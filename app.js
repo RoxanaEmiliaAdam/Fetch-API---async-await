@@ -7,10 +7,7 @@ console.log();
 const btn = document.querySelector(".btn");
 const result = document.querySelector(".result");
 
-let comment;
-
-// Button event
-
+// Async ()
 const fetchData = async () => {
   result.innerText = "Loading...";
   try {
@@ -21,11 +18,16 @@ const fetchData = async () => {
 
     const data = await response.json();
     console.log(data);
+    let resultData = "";
+    data.map((item) => {
+      resultData += `\n Post ID: ${item.postId} \n ID: ${item.id} \n Comment:\n "${item.body}"\n`;
+    });
 
-    result.innerText = data[0].body;
+    result.innerText = resultData;
   } catch (error) {
     result.textContent = "There was an error...";
   }
 };
 
+// Button event
 btn.addEventListener("click", fetchData);
